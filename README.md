@@ -141,6 +141,60 @@ Returns `404` if not found.
 
 ---
 
+## 🧪 Seed Sample Data (Optional)
+
+To help with testing and demonstration, you can seed the database with sample incidents.
+
+### 1. Create a `seed.js` File
+
+Here's the content of `seed.js`:
+
+```javascript
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import Incident from "./models/incident.model.js";
+
+dotenv.config();
+
+const sampleIncidents = [
+  {
+    title: "AI Misclassification",
+    description: "An AI system misclassified a harmless object as a threat.",
+    severity: "High",
+  },
+  {
+    title: "Data Leakage",
+    description: "Personal data was exposed due to model inversion attacks.",
+    severity: "Medium",
+  },
+];
+
+const seedData = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Connected to MongoDB:", conn.connection.host);
+
+    await Incident.deleteMany(); // Clears existing data
+    await Incident.insertMany(sampleIncidents);
+
+    console.log("Sample data seeded successfully.");
+    process.exit();
+  } catch (error) {
+    console.error("Seeding error:", error.message);
+    process.exit(1);
+  }
+};
+
+seedData();
+```
+
+### 2. Run the Seeding Script
+```bash
+node seed.js
+```
+
+---
+
 ## ⚠️ Validation & Error Handling
 
 - Ensures all required fields are provided in requests.
