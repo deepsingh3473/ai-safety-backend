@@ -36,7 +36,7 @@ ai-safety-backend/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/incident-log-api.git
+git clone https://github.com/deepsingh3473/ai-safety-backend.git
 cd ai-safety-backend
 ```
 
